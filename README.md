@@ -14,8 +14,8 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
 1. Clona este repositorio o descarga los archivos.
    
    ```bash
-   git clone <https://github.com/yosbelm/iaBot.git>
-   cd <iaBot>
+   git clone https://github.com/yosbelm/iaBot.git
+   cd iaBot
    ```
 2. Crea los archivos necesarios para la configuración:
 groq_apikey: Este archivo debe contener tu API key de Groq.
