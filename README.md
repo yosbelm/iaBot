@@ -21,16 +21,16 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
 groq_apikey: Este archivo debe contener tu API key de Groq.  
 telegram_token: Este archivo debe contener el token de tu bot de Telegram.  
 
-3. Instala las dependencias necesarias:
-bash
+3. Instala las dependencias necesarias:  
+
 ```
 pip install -r requirements.txt
 ```
 
 4. Asegúrate de que tu bot de Telegram esté configurado correctamente y que tengas los permisos necesarios.
 
-5. Ejecuta el bot:
-bash
+5. Ejecuta el bot:  
+
 ```
 python iabot.py
 ```
