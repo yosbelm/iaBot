@@ -3,9 +3,9 @@ import os
 import logging
 import PyPDF2
 from telegram import Update
-from telegram.ext import Application, MessageHandler, filters, CallbackContext
+from telegram.ext import Application, MessageHandler, filters, CallbackContext, CommandHandler
 import telegram_token
-from groq_apikey import Groq
+from groq import Groq
 import groq_apikey
 
 
@@ -29,9 +29,13 @@ def guardar_historial(historial):
         json.dump(historial, file, ensure_ascii=False, indent=4)
 
 
+async def start(update: Update, context: CallbackContext) -> None:
+    await update.message.reply_text('¡Hola! Soy un bot conversacional que utiliza el modelo de lenguaje LLaMA 3.1 para responder a tus preguntas y conversaciones 🤖. Puedes proporcionarme contexto enviándome archivos PDF 📁 para que pueda entender mejor tus necesidades 🤔. ¡Empecemos!')   
+
+
 async def handle_text(update: Update, context: CallbackContext) -> None:
     user_input = update.message.text
-    contexto_pdf = cargar_historial()  # Obtiene el contexto del historial
+    contexto_pdf = cargar_historial()
     response = obtener_respuesta(user_input, contexto_pdf)
     
     await update.message.reply_text(response)
@@ -44,7 +48,6 @@ async def handle_pdf(update: Update, context: CallbackContext) -> None:
     # Descarga el archivo PDF
     await file.download_to_drive(file_path)
 
-    # Convierte el PDF a texto y lo agrega al historial
     pdf_text = ''
     try:
         with open(file_path, 'rb') as f:
@@ -52,18 +55,16 @@ async def handle_pdf(update: Update, context: CallbackContext) -> None:
             for page in reader.pages:
                 pdf_text += page.extract_text() or ''
         
-        # Cargar el historial y agregar el contenido del PDF
         history = cargar_historial()
         history.append({"role": "system", "content": pdf_text})
         guardar_historial(history)
 
-        await update.message.reply_text('El contenido del PDF ha sido guardado en el historial.')
+        await update.message.reply_text('Contenido PDF almacenado. Contexto para AI disponible.')
     except Exception as e:
         logging.error(f"Error al procesar el PDF: {e}")
         await update.message.reply_text('No se pudo procesar el PDF.')
 
-    # Limpia archivos descargados (opcional)
-    os.remove(file_path)
+    os.remove(file_path) # Eliminar el archivo PDF de la carpeta downloads, por defecto se borra
 
 
 def obtener_respuesta(prompt, historial):
@@ -86,6 +87,7 @@ def obtener_respuesta(prompt, historial):
 def main() -> None:
     app = Application.builder().token(TOKEN).build()
     
+    app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
     app.add_handler(MessageHandler(filters.Document.MimeType("application/pdf"), handle_pdf))
     
