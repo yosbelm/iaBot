@@ -19,7 +19,11 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
     ```
 
 2. Crea los archivos necesarios para la configuración:  
-   `groq_apikey`: Este archivo debe contener tu API key de Groq.  
+   `groq_apikey`: Este archivo debe contener tu API key de Groq y una variable `contexto` con un string que incluya la información que se le va a dar a la IA, como la personalidad y cómo debe responder. Ejemplo de contenido del archivo `groq_apikey`:
+   
+   ```plaintext
+   API_KEY="tu_api_key_de_groq"
+   CONTEXTO="Esta es la información de contexto que define la personalidad y cómo debe responder la IA." 
    `telegram_token`: Este archivo debe contener el token de tu bot de Telegram.  
 
 3. Crea una carpeta llamada `downloads` donde se almacenarán los PDF que se suban. Por defecto, los archivos se borrarán después de procesarlos.
