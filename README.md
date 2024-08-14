@@ -23,7 +23,7 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
    
    ```plaintext
    api_key="tu_api_key_de_groq"
-   contexto="Esta es la información de contexto que define la personalidad y cómo debe responder la IA."  
+   contexto="Información que define la personalidad y la respuesta de la IA."  
    ```
    `telegram_token`: Este archivo debe contener el token de tu bot de Telegram.  
 
