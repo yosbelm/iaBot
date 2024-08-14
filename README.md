@@ -67,4 +67,4 @@ Se puede cambiar el modelo de Llama cambiando el valor del parámetro `model`. L
 - `"llama3-groq-8b-8192-tool-use-preview"`
 - `"llama-guard-3-8b"`
 
-Los modelos más avanzados son los de la versión 3.1. Además, se puede configurar la temperatura entre los valores 0 y 2, en el parámetro `temperature`, donde valores más bajos hacen que las respuestas sean más ajustadas a lo que se le pide. Consulta la documentación en esta página para más detalles: [Groq API Reference](https://console.groq.com/docs/api-reference#chat).
+Los modelos más avanzados son los de la versión 3.1. Además, se puede configurar la temperatura entre los valores 0 y 2 en el parámetro `temperature`, donde valores más bajos hacen que las respuestas sean más ajustadas a lo que se le pide. Consulta la documentación en esta página para más detalles: [Groq API Reference](https://console.groq.com/docs/api-reference#chat).
