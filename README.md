@@ -17,7 +17,7 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
    git clone https://github.com/yosbelm/iaBot.git
    cd iaBot
    ```
-2. Crea los archivos necesarios para la configuración:
+2. Crea los archivos necesarios para la configuración:  
 groq_apikey: Este archivo debe contener tu API key de Groq.  
 telegram_token: Este archivo debe contener el token de tu bot de Telegram.  
 
