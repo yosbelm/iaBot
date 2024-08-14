@@ -1,6 +1,6 @@
 # Bot de Telegram: IA Conversacional con Llama 3.1
 
-Este es un bot de Telegram que utiliza un modelo de IA conversacional basado en Llama 3.1 (70B). El bot puede recibir documentos PDF, extraer el contexto y almacenar la información en un archivo `historial.json`.
+Este es un bot de Telegram que utiliza un modelo de IA conversacional basado en Llama (llama-3.1-70b-versatile por defecto). El bot puede recibir documentos PDF, extraer el contexto y almacenar la información en un archivo `historial.json`.
 
 ## Requisitos
 
@@ -55,3 +55,16 @@ El bot incluye un archivo llamado `stats.py` que sirve para ver las estadística
 
 ```bash
 python stats.py
+```
+
+## Configuración del Modelo
+
+Se puede cambiar el modelo de Llama cambiando el valor del parámetro `model`. Los modelos disponibles son:
+
+- `"llama-3.1-70b-versatile"`
+- `"llama-3.1-8b-instant"`
+- `"llama3-groq-70b-8192-tool-use-preview"`
+- `"llama3-groq-8b-8192-tool-use-preview"`
+- `"llama-guard-3-8b"`
+
+Los modelos más avanzados son los de la versión 3.1. Además, se puede configurar la temperatura entre los valores 0 y 2, en el parámetro `temperature`, donde valores más bajos hacen que las respuestas sean más ajustadas a lo que se le pide. Consulta la documentación en esta página para más detalles: [Groq API Reference](https://console.groq.com/docs/api-reference#chat).
