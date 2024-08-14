@@ -12,36 +12,41 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
 ## Instalación
 
 1. Clona este repositorio o descarga los archivos.
-   
-   ```bash
-   git clone https://github.com/yosbelm/iaBot.git
-   cd iaBot
-   ```
+
+    ```bash
+    git clone https://github.com/yosbelm/iaBot.git
+    cd iaBot
+    ```
+
 2. Crea los archivos necesarios para la configuración:  
-groq_apikey: Este archivo debe contener tu API key de Groq.  
-telegram_token: Este archivo debe contener el token de tu bot de Telegram.  
+   `groq_apikey`: Este archivo debe contener tu API key de Groq.  
+   `telegram_token`: Este archivo debe contener el token de tu bot de Telegram.  
 
-3. Instala las dependencias necesarias:  
+3. Crea una carpeta llamada `downloads` donde se almacenarán los PDF que se suban. Por defecto, los archivos se borrarán después de procesarlos.
 
-```
-pip install -r requirements.txt
-```
+    ```bash
+    mkdir downloads
+    ```
 
-4. Asegúrate de que tu bot de Telegram esté configurado correctamente y que tengas los permisos necesarios.
+4. Instala las dependencias necesarias:
 
-5. Ejecuta el bot:  
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-```
-python iabot.py
-```
+5. Asegúrate de que tu bot de Telegram esté configurado correctamente y que tengas los permisos necesarios.
 
-El bot estará listo para recibir mensajes y procesarlos.
-Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en historial.json.
+6. Ejecuta el bot:
 
-## Estadísticas
-También hay un archivo stats.py que te permite ver las estadísticas de uso de la IA. Puedes ejecutarlo de la siguiente manera:
+    ```bash
+    python iabot.py
+    ```
 
-bash
-```
+El bot estará listo para recibir mensajes y procesarlos. Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en `historial.json`.
+
+## Estadísticas de Uso
+
+El bot incluye un archivo llamado `stats.py` que sirve para ver las estadísticas de uso de la IA. Estas estadísticas incluyen la cantidad de conversaciones, palabras y caracteres procesados. Para ejecutar `stats.py` y ver las estadísticas, usa el siguiente comando:
+
+```bash
 python stats.py
-```
