@@ -3,3 +3,4 @@ groq_apikey.py
 venv
 __pycache__
 historial.json
+secret.key
