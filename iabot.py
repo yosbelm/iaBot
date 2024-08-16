@@ -1,15 +1,13 @@
-import json
 import os
-import logging
+from groq import Groq
 import PyPDF2
+import logging
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, CallbackContext, CommandHandler
-import telegram_token
-from groq import Groq
-import groq_apikey
 import httpx
-from cryptography.fernet import Fernet
-
+import telegram_token
+import groq_apikey
+from encript import *
 
 
 
@@ -20,49 +18,6 @@ bot_active = False
 
         
         
-
-# Cargar o generar la clave
-def load_or_generate_key(key_filename):
-    if os.path.exists(key_filename):
-        with open(key_filename, 'rb') as key_file:
-            return key_file.read()
-    else:
-        key = Fernet.generate_key()
-        with open(key_filename, 'wb') as key_file:
-            key_file.write(key)
-        return key
-
-key_filename = 'secret.key'
-key = load_or_generate_key(key_filename)
-cipher_suite = Fernet(key)    
-      
-# Encriptar y guardar el archivo JSON    
-def save_encrypted_json(filename, data, cipher_suite):
-    json_data = json.dumps(data).encode()
-    encrypted_data = cipher_suite.encrypt(json_data)
-    with open(filename, 'wb') as file:
-        file.write(encrypted_data)
-
-# Leer y desencriptar el archivo JSON, si el archivo está vacío crea la información con el contexto dado
-def load_encrypted_json(filename, cipher_suite):
-    nuevo_contexto = [{"role": "system", "content": groq_apikey.contexto}]
-    try:
-        with open(filename, 'rb') as file:
-            encrypted_data = file.read()
-            if encrypted_data == b'':
-                return json.load(save_encrypted_json(HISTORIAL_FILE, nuevo_contexto, cipher_suite))
-            else:
-                decrypted_data = cipher_suite.decrypt(encrypted_data)
-                return json.loads(decrypted_data)
-    except:
-        with open(filename, 'rb') as file:
-            encrypted_data = file.read()
-            decrypted_data = cipher_suite.decrypt(encrypted_data)
-            return json.loads(decrypted_data)
-        
-
-
-
 async def start(update: Update, context: CallbackContext) -> None:
     global bot_active
     if not bot_active:
@@ -126,7 +81,6 @@ async def handle_audio(update: Update, context: CallbackContext) -> None:
                 transcription = client.audio.transcriptions.create(
                     file=(file_path, file.read()),
                     model="whisper-large-v3",
-                    prompt="Transcribe el audio de manera literal y precisa, sin interpretaciones ni conjeturas. Respetar las reglas de gramática, ortografía y sintaxis del idioma. No omitir ni agregar información. Si hay errores de pronunciación o entonación, transcribir exactamente lo que se escucha. No hacer suposiciones ni inferencias. Transcripción debe ser fiel y exacta al contenido del audio.",
                     response_format="json",
                     language="es",
                     temperature=0.0
@@ -183,6 +137,7 @@ async def clear_context(update: Update, context: CallbackContext) -> None:
         await update.message.reply_text('El bot está detenido. Usa /start para iniciarlo.')
 
 
+
 def main() -> None:
     app = Application.builder().token(TOKEN).build()
 
@@ -194,6 +149,8 @@ def main() -> None:
     app.add_handler(CommandHandler("exit", exit_bot))
     
     app.run_polling()
+
+
 
 if __name__ == '__main__':
     # Crea la carpeta downloads si no existe
