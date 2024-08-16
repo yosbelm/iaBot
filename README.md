@@ -21,7 +21,7 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
     ```
 
 2. Crea los archivos necesarios para la configuración:  
-   `groq_apikey`: Este archivo debe contener tu API key de Groq y una variable `contexto` con un string que incluya la información que se le va a dar a la IA, como la personalidad y cómo debe responder. Ejemplo de contenido del archivo `groq_apikey`:
+   `groq_apikey`: Este archivo debe contener tu API key de Groq y una variable `contexto` con un string que incluya la información que se le va a dar a la IA, como la personalidad y cómo debe responder. Ejemplo de contenido del archivo:
    
    ```plaintext
    api_key="tu_api_key_de_groq"
@@ -53,7 +53,7 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
 Si tienes problemas con la ejecución, asegúrate de que estás ejecutando el
 script desde el directorio raíz del proyecto.
 
-El bot estará listo para recibir mensajes y procesarlos. Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en `historial.json`. Además, al enviar un audio en formato OGG, el bot lo transcribirá y añadirá la transcripción al contexto de la conversación, esto también se almacenará en `historial.json`.
+El bot estará listo para recibir mensajes y procesarlos. Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en `historial.json`. Además, al enviar un audio, el bot lo transcribirá y añadirá la transcripción al contexto de la conversación, esto también se almacenará en el mismo archivo.
 
 
 ## Comandos del Bot
