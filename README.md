@@ -1,6 +1,8 @@
 # Bot de Telegram: IA Conversacional con Llama 3.1
 
-Este es un bot de Telegram que utiliza un modelo de IA conversacional basado en Llama (llama-3.1-70b-versatile por defecto). El bot puede recibir documentos PDF, extraer el contexto y almacenar la información en un archivo `historial.json`.
+Este es un bot de Telegram que utiliza un modelo de IA conversacional basado en Llama (llama-3.1-70b-versatile por defecto). El bot puede recibir documentos PDF, extraer el contexto y almacenar la información en un archivo `historial.json` encriptado. Además, el bot puede transcribir audios en formato OGG, proporcionando una mayor funcionalidad al recibir mensajes de voz.
+
+
 
 ## Requisitos
 
@@ -27,35 +29,39 @@ Antes de ejecutar el bot, asegúrate de tener instalado Python y los siguientes 
    ```
    `telegram_token`: Este archivo debe contener el token de tu bot de Telegram.  
 
-3. Crea una carpeta llamada `downloads` donde se almacenarán los PDF que se suban. Por defecto, los archivos se borrarán después de procesarlos.
+   ```plaintext
+   api_token="Tu token del bot que creaste en Telegram."
+   ```
 
-    ```bash
-    mkdir downloads
-    ```
-
-4. Instala las dependencias necesarias:
+3. Instala las dependencias necesarias:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-5. Asegúrate de que tu bot de Telegram esté configurado correctamente y que tengas los permisos necesarios.
+4. Ejecuta el bot.
 
-6. Ejecuta el bot:
-
+- **Windows**:
     ```bash
     python iabot.py
     ```
 
-El bot estará listo para recibir mensajes y procesarlos. Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en `historial.json`.
+- **Linux / macOS**:
+    ```bash
+    python3 iabot.py
+    ```
+Si tienes problemas con la ejecución, asegúrate de que estás ejecutando el
+script desde el directorio raíz del proyecto.
 
-## Estadísticas de Uso
+El bot estará listo para recibir mensajes y procesarlos. Envía un documento PDF al bot y comienza la conversación. El contexto del PDF se almacenará en `historial.json`. Además, al enviar un audio en formato OGG, el bot lo transcribirá y añadirá la transcripción al contexto de la conversación, esto también se almacenará en `historial.json`.
 
-El bot incluye un archivo llamado `stats.py` que sirve para ver las estadísticas de uso de la IA. Estas estadísticas incluyen la cantidad de conversaciones, palabras y caracteres procesados. Para ejecutar `stats.py` y ver las estadísticas, usa el siguiente comando:
 
-```bash
-python stats.py
-```
+## Comandos del Bot
+
+- **/start**: Inicia el bot. Este comando debe ser enviado para comenzar a interactuar con el bot.
+- **/exit**: Detiene el bot. Utiliza este comando para finalizar la interacción con el bot.
+- **/clear_context**: Limpia todo el contexto almacenado. Este comando elimina toda la información almacenada en el archivo `historial.json`.
+
 
 ## Configuración del Modelo
 
@@ -68,3 +74,9 @@ Se puede cambiar el modelo de Llama cambiando el valor del parámetro `model`. L
 - `"llama-guard-3-8b"`
 
 Los modelos más avanzados son los de la versión 3.1. Además, se puede configurar la temperatura entre los valores 0 y 2 en el parámetro `temperature`, donde valores más bajos hacen que las respuestas sean más ajustadas a lo que se le pide. Consulta la documentación en esta página para más detalles: [Groq API Reference](https://console.groq.com/docs/api-reference#chat).
+
+
+## Características Adicionales
+Encriptación de datos: El archivo historial.json, donde se almacenan todos los datos y de donde el bot extrae el contexto, está encriptado para garantizar la seguridad de la información.  
+
+Transcripción de audios: El bot puede transcribir audios en formato OGG, añadiendo así una mayor funcionalidad al recibir mensajes de voz.
