@@ -32,6 +32,7 @@ async def handle_text(update: Update, context: CallbackContext) -> None:
         user_input = update.message.text
         contexto_pdf = load_encrypted_json(HISTORIAL_FILE, cipher_suite)
         try:
+            await context.bot.send_chat_action(chat_id=update.effective_chat.id, action='typing')
             response = obtener_respuesta(user_input, contexto_pdf)
             await update.message.reply_text(response)
         except httpx.ConnectTimeout:
