@@ -4,3 +4,5 @@ venv
 __pycache__
 historial.json
 secret.key
+audio
+downloads
