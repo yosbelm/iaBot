@@ -111,7 +111,7 @@ def obtener_respuesta(prompt, historial):
     historial.append({"role": "user", "content": prompt})
     chat_completion = client.chat.completions.create(
         messages=historial,
-        model="llama-3.1-8b-instant",
+        model="llama-3.1-70b-versatile",
         temperature=0.5,
         max_tokens=1024,
     )
